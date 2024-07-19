@@ -137,6 +137,10 @@
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
+
+                // unityInstance가 초기화된 후에 Module을 설정합니다.
+                Module.unityInstance = unityInstance;
+
               }).catch((message) => {
                 alert(message);
               });
