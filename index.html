@@ -120,7 +120,7 @@
             }).then((unityInstance) => {
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
-                    unityInstance.SetFullscreen(1);
+                    document.makeFullscreen('unity-container');
                 };
 
                 // unityInstance가 초기화된 후에 Module을 설정합니다.
