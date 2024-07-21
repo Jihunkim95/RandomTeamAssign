@@ -10,6 +10,12 @@
         var Module = {
             onRuntimeInitialized: function() {
                 console.log('WebGL module initialized');
+                if (typeof unityInstance !== 'undefined') {
+                    Module.unityInstance = unityInstance;
+                    console.log("unityInstance 초기화 완료");
+                } else {
+                    console.error('unityInstance is not defined');
+                }
             }
         };
 
@@ -24,7 +30,12 @@
 
         function GetClipboardText() {
             navigator.clipboard.readText().then(function(text) {
-                Module.unityInstance.SendMessage("TextCopyHandler", "SetInputFieldText", text);
+                console.log("Clipboard text:", text);
+                if (typeof Module.unityInstance !== 'undefined' && Module.unityInstance !== null) {
+                    Module.unityInstance.SendMessage("TextCopyHandler", "SetInputFieldText", text);
+                } else {
+                    console.error('unityInstance is not defined or null');
+                }
             }).catch(function(error) {
                 console.error('Failed to read text: ', error);
             });
@@ -114,6 +125,7 @@
 
                 // unityInstance가 초기화된 후에 Module을 설정합니다.
                 Module.unityInstance = unityInstance;
+                console.log("unityInstance 초기화 완료");
 
             }).catch((message) => {
                 alert(message);
